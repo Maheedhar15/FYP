@@ -10,7 +10,7 @@ const Reveal = ({ children, width = 'fit-content' }) => {
           visible: { opacity: 1, y: 0 },
         }}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
         transition={{ duration: 0.5, delay: 0.25 }}
       >
         {children}
@@ -18,7 +18,7 @@ const Reveal = ({ children, width = 'fit-content' }) => {
       <motion.div
         variants={{ hidden: { left: 0 }, visible: { left: '100%' } }}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
         transition={{ duration: 0.5, ease: 'easeIn' }}
         style={{
           position: 'absolute',

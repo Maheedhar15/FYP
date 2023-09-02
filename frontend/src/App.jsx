@@ -12,7 +12,7 @@ function App() {
     <>
       <div className="main">
         <Reveal>
-          <h1 className="font-poppins ml-[0px] mb-[40px]">Predict Here</h1>
+          <h1 className="font-poppin ml-[0px] mb-[40px]">Predict Here</h1>
         </Reveal>
         <div className="card ml-[42px]">
           <Dropdown />

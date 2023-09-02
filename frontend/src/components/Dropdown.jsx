@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { BsArrowRight, BsCheckLg } from 'react-icons/bs';
+import '../index.css';
 
 function Dropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,13 +21,16 @@ function Dropdown() {
   return (
     <div className="flex duration-300 w-[1920px]">
       <div className="ml-[100px] mt-[100px]">
-        <button onClick={() => setIsOpen(!isOpen)} className="text-[#fff]">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-[#fff] font-poppins"
+        >
           Select here
         </button>
         {isOpen && (
           <div className="flex flex-col">
             <Select
-              className="basic-single w-[858px] font-inter"
+              className="basic-single w-[858px] font-poppins text-[#000]"
               placeholder={SuggestedMapping}
               name={SuggestedMapping}
               options={options}
