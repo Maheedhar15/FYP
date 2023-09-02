@@ -7,7 +7,7 @@ test_data = np.array([[ 1.02446643,  0.06941869,  0.98895712,  0.43198381, -0.20
        -0.08506963, -0.8038884 , -0.2002037 , -0.00346677, -1.71612817,
        -1.38886077, -0.78449469, -0.49678817,  0.11870612]])
 
-filename = './models/best_model.sav'
+filename = './best_model.sav'
 
 loaded_best_model = pickle.load(open(filename, 'rb'))
 
