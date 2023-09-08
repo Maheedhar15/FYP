@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .input-text {
+    @apply font-poppins mt-[10px] font-semibold text-[20px] text-[#7EFF66] leading-[150%] w-[84px] h-[24px] justify-start;
+  }
+  .box-text {
+    @apply p-[13px] items-center w-[683px] bg-[#F9FAFA] text-[#000];
+  }
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
