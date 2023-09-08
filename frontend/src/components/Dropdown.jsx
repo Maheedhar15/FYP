@@ -21,7 +21,7 @@ function Dropdown(props) {
     setIsOpen(false);
   };
   return (
-    <div className="flex duration-300 w-[1920px]">
+    <div className="flex duration-300 w-[220px]">
       <div className=" mt-[20px]">
         <button
           onClick={() => setIsOpen(!isOpen)}

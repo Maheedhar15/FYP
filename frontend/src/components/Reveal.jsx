@@ -15,21 +15,6 @@ const Reveal = ({ children, width = 'fit-content' }) => {
       >
         {children}
       </motion.div>
-      <motion.div
-        variants={{ hidden: { left: 0 }, visible: { left: '100%' } }}
-        initial="hidden"
-        whileInView="visible"
-        transition={{ duration: 0.5, ease: 'easeIn' }}
-        style={{
-          position: 'absolute',
-          top: 4,
-          bottom: 4,
-          left: 0,
-          right: 0,
-          zIndex: 20,
-          background: '#7EFF66',
-        }}
-      />
     </div>
   );
 };

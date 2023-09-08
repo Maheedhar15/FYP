@@ -3,16 +3,30 @@ import Dropdown from './Components/Dropdown';
 import Reveal from './components/Reveal';
 import { FaHandHoldingHeart } from 'react-icons/fa';
 import { AiOutlineUser } from 'react-icons/ai';
+import { BiInfoCircle } from 'react-icons/bi';
 import FraminghamDataset from './Components/FraminghamDataset';
 import KEELDataset from './Components/KEELDataset';
 import './index.css';
 import LappDataset from './Components/LappDataset';
+import { toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [SelectedModel, setSelectedModel] = useState('framingham');
+  const [LegendToggle, setLegendToggle] = useState(false);
 
+  const handleInfo = () => {
+    toast.success(
+      'There are three datasets available, choose the one that best fits the data that you have',
+      {
+        duration: 4000,
+        position: 'top-center',
+      }
+    );
+  };
   return (
     <>
+      <Toaster />
       <div className="main">
         <div className="px-[5px] py-[5px] flex w-full">
           <FaHandHoldingHeart className="fill-[#7EFF66] w-[50px] h-[50px] ml-[10px] mt-[10px]" />
@@ -32,11 +46,14 @@ function App() {
             Select Model
           </h1>
         </Reveal>
-        <div className="card ml-[20px]">
+        <div className="card ml-[20px] flex">
           <Dropdown
             SelectedModel={SelectedModel}
             setSelectedModel={setSelectedModel}
           />
+          <button onClick={() => handleInfo()}>
+            <BiInfoCircle className="w-[30px] h-[30px] fill-[#7EFF66] text-[#fff] mt-[18px]" />
+          </button>
         </div>
         <div>
           {SelectedModel == 'framingham' ? (
