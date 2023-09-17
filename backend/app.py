@@ -6,23 +6,31 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
+
 from flask import request
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 # Setup the Flask-JWT-Extended extension
 
-
-test_data = np.array([[ 1.02446643,  0.06941869,  0.98895712,  0.43198381, -0.20370714,
-       -0.08506963, -0.8038884 , -0.2002037 , -0.00346677, -1.71612817,
-       -1.38886077, -0.78449469, -0.49678817,  0.11870612]])
-
 filename = './best_model.sav'
+filename_scaler_framingham = './scaler_framingham.sav'
+
+loaded_scaler_fram = pickle.load(open(filename_scaler_framingham,'rb'))
 
 loaded_best_model = pickle.load(open(filename, 'rb'))
 
 app = Flask(__name__)
+CORS(app, origins='*')
 
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 jwt = JWTManager(app)
+
+def ConvertToBinary(val):
+    if(val.lower() == 'yes'):
+        return 1.0
+    return 0.0
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -46,7 +54,27 @@ def protected():
 @app.route('/predict_framingham', methods=['POST'])
 def home():
     if request.method == 'POST':
-        result = loaded_best_model.predict(test_data)
+        data = request.json
+        male=ConvertToBinary(data['male'])
+        age=float(data['age'])
+        currentSmoker=ConvertToBinary(data['currentSmoker'])
+        cigsPerDay=float(data['cigsPerDay'])
+        BPmeds=ConvertToBinary(data['BPmeds'])
+        prevalentStroke=ConvertToBinary(data['prevalentStroke'])
+        prevalentHyp=ConvertToBinary(data['prevalentHyp'])
+        diabetes=ConvertToBinary(data['diabetes'])
+        totChol=float(data['totChol'])
+        sysBP=float(data['sysBP'])
+        diaBP=float(data['diaBP'])
+        bmi=float(data['bmi'])
+        heartRate=float(data['heartRate'])
+        glucose=float(data['glucose'])
+        testData = {'male':male,'age':age,'currentSmoker':currentSmoker,'cigsPerDay': cigsPerDay, 'BPMeds': BPmeds, 'prevalentStroke': prevalentStroke
+                    , 'prevalentHyp': prevalentHyp, 'diabetes': diabetes, 'totChol': totChol, 'sysBP': sysBP, 'diaBP': diaBP, 'BMI': bmi, 'heartRate': heartRate,
+                    'glucose': glucose}
+        test_df = pd.DataFrame(testData, index=['0'])
+        test = loaded_scaler_fram.transform(test_df)
+        result = loaded_best_model.predict(np.array(test))
         if(result[0] == 0):
             ans = 'The person is Healthy and is Less prone to Chronic Heart Disease'
         else:

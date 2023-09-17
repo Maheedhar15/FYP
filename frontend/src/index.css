@@ -7,7 +7,7 @@
     @apply font-poppins mt-[10px] font-semibold text-[20px] text-[#7EFF66] leading-[150%] w-[284px] h-[24px] justify-start;
   }
   .box-text {
-    @apply p-[13px] items-center w-[483px] bg-[#F9FAFA] text-[#000];
+    @apply p-[13px] items-center w-[383px] bg-[#F9FAFA] text-[#000];
   }
 }
 

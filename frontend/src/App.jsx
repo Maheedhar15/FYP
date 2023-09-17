@@ -42,7 +42,7 @@ function App() {
         </div>
 
         <Reveal>
-          <h1 className="font-poppins text-center justify-center ml-[20px] mt-[70px] text-[#7EFF66]">
+          <h1 className="font-poppins text-center justify-center ml-[20px] mt-[40px] text-[#7EFF66]">
             Select Model
           </h1>
         </Reveal>
