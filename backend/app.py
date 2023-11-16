@@ -81,6 +81,67 @@ def home():
             ans = 'The person is Unhealthy and is more prone to Chronic Heart Disease'
         return jsonify({'prediction': ans})
 
+@app.route('/predict_davidlapp', methods=['POST'])
+def home():
+    if request.method == 'POST':
+        data = request.json
+        male=ConvertToBinary(data['male'])
+        age=float(data['age'])
+        currentSmoker=ConvertToBinary(data['currentSmoker'])
+        cigsPerDay=float(data['cigsPerDay'])
+        BPmeds=ConvertToBinary(data['BPmeds'])
+        prevalentStroke=ConvertToBinary(data['prevalentStroke'])
+        prevalentHyp=ConvertToBinary(data['prevalentHyp'])
+        diabetes=ConvertToBinary(data['diabetes'])
+        totChol=float(data['totChol'])
+        sysBP=float(data['sysBP'])
+        diaBP=float(data['diaBP'])
+        bmi=float(data['bmi'])
+        heartRate=float(data['heartRate'])
+        glucose=float(data['glucose'])
+        testData = {'male':male,'age':age,'currentSmoker':currentSmoker,'cigsPerDay': cigsPerDay, 'BPMeds': BPmeds, 'prevalentStroke': prevalentStroke
+                    , 'prevalentHyp': prevalentHyp, 'diabetes': diabetes, 'totChol': totChol, 'sysBP': sysBP, 'diaBP': diaBP, 'BMI': bmi, 'heartRate': heartRate,
+                    'glucose': glucose}
+        test_df = pd.DataFrame(testData, index=['0'])
+        test = loaded_scaler_fram.transform(test_df)
+        result = loaded_best_model.predict(np.array(test))
+        if(result[0] == 0):
+            ans = 'The person is Healthy and is Less prone to Chronic Heart Disease'
+        else:
+            ans = 'The person is Unhealthy and is more prone to Chronic Heart Disease'
+        return jsonify({'prediction': ans})
+    
+@app.route('/predict_keel', methods=['POST'])
+def home():
+    if request.method == 'POST':
+        data = request.json
+        male=ConvertToBinary(data['male'])
+        age=float(data['age'])
+        currentSmoker=ConvertToBinary(data['currentSmoker'])
+        cigsPerDay=float(data['cigsPerDay'])
+        BPmeds=ConvertToBinary(data['BPmeds'])
+        prevalentStroke=ConvertToBinary(data['prevalentStroke'])
+        prevalentHyp=ConvertToBinary(data['prevalentHyp'])
+        diabetes=ConvertToBinary(data['diabetes'])
+        totChol=float(data['totChol'])
+        sysBP=float(data['sysBP'])
+        diaBP=float(data['diaBP'])
+        bmi=float(data['bmi'])
+        heartRate=float(data['heartRate'])
+        glucose=float(data['glucose'])
+        testData = {'male':male,'age':age,'currentSmoker':currentSmoker,'cigsPerDay': cigsPerDay, 'BPMeds': BPmeds, 'prevalentStroke': prevalentStroke
+                    , 'prevalentHyp': prevalentHyp, 'diabetes': diabetes, 'totChol': totChol, 'sysBP': sysBP, 'diaBP': diaBP, 'BMI': bmi, 'heartRate': heartRate,
+                    'glucose': glucose}
+        test_df = pd.DataFrame(testData, index=['0'])
+        test = loaded_scaler_fram.transform(test_df)
+        result = loaded_best_model.predict(np.array(test))
+        if(result[0] == 0):
+            ans = 'The person is Healthy and is Less prone to Chronic Heart Disease'
+        else:
+            ans = 'The person is Unhealthy and is more prone to Chronic Heart Disease'
+        return jsonify({'prediction': ans})
+
+
 
 if  __name__ == "__main__":
     app.run(debug=True)

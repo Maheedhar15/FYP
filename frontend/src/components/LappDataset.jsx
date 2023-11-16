@@ -3,22 +3,42 @@ import '../index.css';
 import Reveal from '../components/Reveal';
 const LappDataset = () => {
   const [Data, setData] = useState({
-    male: '',
     age: '',
-    currentSmoker: '',
-    height: '',
-    weight: '',
-    alco: '',
-    active: '',
-    totChol: '',
-    sysBP: '',
-    diaBP: '',
-    glucose: '',
+    sex: '',
+    cp: '',
+    trestbps: '',
+    cholestrol: '',
+    fbs: '',
+    restecg: '',
+    thalach: '',
+    exang: '',
+    oldpeak: '',
+    slope: '',
+    ca: '',
+    thal: '',
   });
 
   const handleDataChange = (event) => {
     const { name, value } = event.target;
     setData({ ...Data, [name]: value });
+  };
+
+  const handlePredict = async () => {
+    await axios
+      .post('https://maheedhar.pythonanywhere.com/predict_davidlapp', Data)
+      .then((res) => {
+        if (res.data.value == '0') {
+          toast.success(res.data.prediction, {
+            duration: 4000,
+            position: 'top-center',
+          });
+        } else {
+          toast.error(res.data.prediction, {
+            duration: 4000,
+            position: 'top-center',
+          });
+        }
+      });
   };
 
   return (
@@ -32,8 +52,8 @@ const LappDataset = () => {
                 type="text"
                 className="box-text"
                 required={true}
-                value={Data.male}
-                name="male"
+                value={Data.sex}
+                name="sex"
                 onChange={(e) => handleDataChange(e)}
               />
             </div>
@@ -52,127 +72,167 @@ const LappDataset = () => {
             </div>
           </div>
           <div className=" flex gap-[20px]">
-            <span className="input-text">Are you a current Smoker:</span>
+            <span className="input-text">
+              Enter you chest pain level on a scale of 1 to 4:
+            </span>
             <div className="border-2 border-[#7EFF66] rounded">
               <input
                 type="text"
                 className="box-text"
                 required={true}
-                value={Data.currentSmoker}
-                name="currentSmoker"
+                value={Data.cp}
+                name="cp"
                 onChange={(e) => handleDataChange(e)}
               />
             </div>
           </div>
           <div className=" flex gap-[20px]">
-            <span className="input-text">Weight(in kg):</span>
+            <span className="input-text">Resting Blood Pressure:</span>
             <div className="border-2 border-[#7EFF66] rounded">
               <input
                 type="number"
                 className="box-text"
                 required={true}
-                value={Data.weight}
-                name="weight"
-                onChange={(e) => handleDataChange(e)}
-              />
-            </div>
-          </div>
-          <div className=" flex gap-[20px]">
-            <span className="input-text">Height(in cm):</span>
-            <div className="border-2 border-[#7EFF66] rounded">
-              <input
-                type="number"
-                className="box-text"
-                required={true}
-                value={Data.height}
-                name="Height"
-                onChange={(e) => handleDataChange(e)}
-              />
-            </div>
-          </div>
-          <div className=" flex gap-[20px]">
-            <span className="input-text">Total Cholestrol level:</span>
-            <div className="border-2 border-[#7EFF66] rounded">
-              <input
-                type="number"
-                className="box-text"
-                required={true}
-                value={Data.totChol}
-                name="totChol"
-                onChange={(e) => handleDataChange(e)}
-              />
-            </div>
-          </div>
-          <div className=" flex gap-[20px]">
-            <span className="input-text">Systolic Blood Pressure:</span>
-            <div className="border-2 border-[#7EFF66] rounded">
-              <input
-                type="number"
-                className="box-text"
-                required={true}
-                value={Data.sysBP}
-                name="sysBP"
-                onChange={(e) => handleDataChange(e)}
-              />
-            </div>
-          </div>
-          <div className=" flex gap-[20px]">
-            <span className="input-text">Diastolic Blood Pressure:</span>
-            <div className="border-2 border-[#7EFF66] rounded">
-              <input
-                type="number"
-                className="box-text"
-                required={true}
-                value={Data.diaBP}
-                name="diaBP"
-                onChange={(e) => handleDataChange(e)}
-              />
-            </div>
-          </div>
-          <div className=" flex gap-[20px]">
-            <span className="input-text">Do you consume alcohol:</span>
-            <div className="border-2 border-[#7EFF66] rounded">
-              <input
-                type="text"
-                className="box-text"
-                required={true}
-                value={Data.alco}
-                name="bmi"
+                value={Data.trestbps}
+                name="trestbps"
                 onChange={(e) => handleDataChange(e)}
               />
             </div>
           </div>
           <div className=" flex gap-[20px]">
             <span className="input-text">
-              How active are you on a scale of 1 to 100:
+              Serum Cholestrol level (in mg/dl):
             </span>
             <div className="border-2 border-[#7EFF66] rounded">
               <input
                 type="number"
                 className="box-text"
                 required={true}
-                value={Data.active}
-                name="heartRate"
+                value={Data.cholestrol}
+                name="cholestrol"
                 onChange={(e) => handleDataChange(e)}
               />
             </div>
           </div>
           <div className=" flex gap-[20px]">
-            <span className="input-text">Glucose:</span>
+            <span className="input-text">Fasting blood sugar level:</span>
             <div className="border-2 border-[#7EFF66] rounded">
               <input
                 type="number"
                 className="box-text"
                 required={true}
-                value={Data.glucose}
-                name="glucose"
+                value={Data.fbs}
+                name="fbs"
+                onChange={(e) => handleDataChange(e)}
+              />
+            </div>
+          </div>
+          <div className=" flex gap-[20px]">
+            <span className="input-text">
+              Resting electrocardiographic results (values 0,1,2):
+            </span>
+            <div className="border-2 border-[#7EFF66] rounded">
+              <input
+                type="number"
+                className="box-text"
+                required={true}
+                value={Data.restecg}
+                name="restecg"
+                onChange={(e) => handleDataChange(e)}
+              />
+            </div>
+          </div>
+          <div className=" flex gap-[20px]">
+            <span className="input-text">Maximum heart rate achieved:</span>
+            <div className="border-2 border-[#7EFF66] rounded">
+              <input
+                type="number"
+                className="box-text"
+                required={true}
+                value={Data.thalach}
+                name="thalach"
+                onChange={(e) => handleDataChange(e)}
+              />
+            </div>
+          </div>
+          <div className=" flex gap-[20px]">
+            <span className="input-text">Exercise induced angina:</span>
+            <div className="border-2 border-[#7EFF66] rounded">
+              <input
+                type="text"
+                className="box-text"
+                required={true}
+                value={Data.exang}
+                name="exang"
+                onChange={(e) => handleDataChange(e)}
+              />
+            </div>
+          </div>
+          <div className=" flex gap-[20px]">
+            <span className="input-text">
+              ST depression induced by exercise relative to rest
+            </span>
+            <div className="border-2 border-[#7EFF66] rounded">
+              <input
+                type="number"
+                className="box-text"
+                required={true}
+                value={Data.oldpeak}
+                name="oldpeak"
+                onChange={(e) => handleDataChange(e)}
+              />
+            </div>
+          </div>
+          <div className=" flex gap-[20px]">
+            <span className="input-text">
+              The slope of the peak exercise ST segment:
+            </span>
+            <div className="border-2 border-[#7EFF66] rounded">
+              <input
+                type="number"
+                className="box-text"
+                required={true}
+                value={Data.slope}
+                name="slope"
+                onChange={(e) => handleDataChange(e)}
+              />
+            </div>
+          </div>
+          <div className=" flex gap-[20px]">
+            <span className="input-text">
+              Number of major vessels (0-3) colored by flourosopynumber of major
+              vessels (0-3) colored by flourosopy:
+            </span>
+            <div className="border-2 border-[#7EFF66] rounded">
+              <input
+                type="number"
+                className="box-text"
+                required={true}
+                value={Data.ca}
+                name="slope"
+                onChange={(e) => handleDataChange(e)}
+              />
+            </div>
+          </div>
+          <div className=" flex gap-[20px]">
+            <span className="input-text">
+              Enter the value of thal: 0 = normal; 1 = fixed defect; 2 =
+              reversable defect :
+            </span>
+            <div className="border-2 border-[#7EFF66] rounded">
+              <input
+                type="number"
+                className="box-text"
+                required={true}
+                value={Data.thal}
+                name="thal"
                 onChange={(e) => handleDataChange(e)}
               />
             </div>
           </div>
         </div>
         <div>
-          <button className="font-poppins py-[10px] px-[10px] bg-[#7EFF66] border-[1px] border-[#fff] text-[#000] rounded-[10px] font-semibold text-[18px] ml-[900px] mt-[60px]">
+          <button className="font-poppins py-[10px] px-[10px] bg-[#7EFF66] border-[1px] border-[#fff] text-[#000] rounded-[10px] font-semibold text-[18px] ml-[700px] mt-[60px]">
             Predict
           </button>
         </div>
