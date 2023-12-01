@@ -11,7 +11,7 @@ function Dropdown(props) {
   const options = [
     { value: 'framingham', label: 'Framingham Dataset' },
     { value: 'keel', label: 'KEEL Heart Disease Dataset' },
-    { value: 'david_lapp', label: 'David Lapp Dataset' },
+    { value: 'Cleveland', label: 'Cleveland Dataset' },
   ];
 
   const handleDataChange = (selectedOption) => {

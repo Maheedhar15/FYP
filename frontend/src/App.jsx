@@ -7,7 +7,7 @@ import { BiInfoCircle } from 'react-icons/bi';
 import FraminghamDataset from './Components/FraminghamDataset';
 import KEELDataset from './Components/KEELDataset';
 import './index.css';
-import LappDataset from './Components/LappDataset';
+import ClevelandDataset from './Components/ClevelandDataset';
 import { toast } from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 
@@ -61,7 +61,7 @@ function App() {
           ) : SelectedModel == 'keel' ? (
             <KEELDataset />
           ) : (
-            <LappDataset />
+            <ClevelandDataset />
           )}
         </div>
       </div>
